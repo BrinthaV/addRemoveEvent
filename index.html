@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button-Mouse Events</title>
+   
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #container
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid black;
+            padding: 20px;
+            width: 50%;
+            height: 50%;
+        }
+
+        #myButton1 {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: lightcoral;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #myButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        #myButton:hover {
+            background-color: #45a049;
+        }
+
+        #message {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <button id="myButton">Click me!</button>
+        <h1 id="message"></h1><br><br>
+
+        <button id="myButton1">Click me (3 times)</button>
+        <p id="message1">You have clicked the button 0 times.</p>
+    </div>
+
+    <script>
+
+        const button = document.getElementById("myButton");
+        const message = document.getElementById("message");       
+
+        button.addEventListener("click", function () {
+            button.style.backgroundColor = "lightblue";
+            message.innerText = "Button was clicked!";
+        });
+
+        button.addEventListener("mouseover", function () {
+            button.style.backgroundColor = "#4CAF50";
+             message.innerText = "Mouse over button Action!";          
+        });
+
+        button.addEventListener("mouseenter", function () {
+            button.style.backgroundColor = "#4CAF50";
+            message.innerText = "Mouse Enter Event on the button!";
+        });
+
+
+        button.addEventListener("mouseleave", function () {
+            button.style.backgroundColor = "#4CAF50";
+            message.innerText = "Mouse left from the button!";
+        });
+
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                button.style.backgroundColor = "red";
+                message.innerText = "Enter key pressed!";
+            }
+        });
+
+        let clickCount = 0;
+        function handleClick() {
+            clickCount++;
+            message1.innerText = `You have clicked the button ${clickCount} times.`;
+            if (clickCount === 3) {
+                button1.removeEventListener('click', handleClick);
+                message1.innerText = 'You clicked the button 3 times. Event listener removed! Double Click to Enable the Button';
+            }
+        }
+        
+        const button1 = document.getElementById('myButton1');
+        const message1 = document.getElementById('message1');
+
+        
+        button1.addEventListener('click', handleClick);
+
+        button1.addEventListener('dblclick', function(){
+                button1.style.background="green";
+                message1.innerText = 'Button Enabled. Presse Enter key to start again';  
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                button1.style.backgroundColor = "lightcoral";
+                message1.innerText = "Enter key pressed! Refresh Page to Start Again";
+            }
+        });
+       
+    </script>
+
+</body>
+</html>
